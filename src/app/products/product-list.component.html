@@ -35,9 +35,9 @@
 						<tbody>
 							<tr *ngFor='let product of products'>
 								<td>
-									<div *ngIf='showImage' then first else second> </div>
-									<ng-template #first> showing image</ng-template>
-									<ng-template #second> no image </ng-template>
+									<div *ngIf='showImage'>
+                        showing image
+                   </div>
 								</td>
 								<td>{{product.productName}}</td>
 								<td>{{product.productCode}}</td>
