@@ -20,8 +20,9 @@
 						<thead>
 							<tr>
 								<th>
-									<button class='btn btn-primary'>
-                Show Image
+									<button class='btn btn-primary'
+                      (click)='toggleImage()'>
+                {{showImage ? 'Hide' : 'Show'}} Image
               </button>
 								</th>
 								<th>Product</th>
@@ -33,7 +34,10 @@
 						</thead>
 						<tbody>
 							<tr *ngFor='let product of products'>
-								<td>showing image
+								<td>
+									<div *ngIf='showImage' then first else second> </div>
+									<ng-template #first> showing image</ng-template>
+									<ng-template #second> no image </ng-template>
 								</td>
 								<td>{{product.productName}}</td>
 								<td>{{product.productCode}}</td>
