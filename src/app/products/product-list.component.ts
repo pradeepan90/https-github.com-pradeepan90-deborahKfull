@@ -41,8 +41,16 @@ export class ProductListComponent {
     this.temp_listfilter = value;
     this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
   }
-
+  constructor (){
+    this.filteredProducts = this.products;
+    this.listFilter =''
+  }
   toggleImage(): void {
     this.showImage = !this.showImage;
+  }
+    performFilter(filterBy: string): IProduct[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.products.filter((product: IProduct) =>
+      product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 }
