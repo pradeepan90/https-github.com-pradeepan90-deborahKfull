@@ -9,7 +9,8 @@ import { IProduct } from "./product";
 export class ProductListComponent {
   pageTitle: string = "Product list";
   showImage: boolean = false;
-  listFilter: string = "cart";
+  //listFilter: string = "cart";
+  filteredProducts: IProduct[] = [];
   products: IProduct[] = [
     {
       productId: 1,
@@ -32,6 +33,14 @@ export class ProductListComponent {
       imageUrl: "assets/images/garden_cart.png"
     }
   ];
+    temp_listfilter = '';
+  get listFilter(): string {
+    return this.temp_listfilter;
+  }
+  set listFilter(value: string) {
+    this.temp_listfilter = value;
+    this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
+  }
 
   toggleImage(): void {
     this.showImage = !this.showImage;
