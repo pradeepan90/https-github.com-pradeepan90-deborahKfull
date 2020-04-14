@@ -33,24 +33,31 @@ export class ProductListComponent {
       imageUrl: "assets/images/garden_cart.png"
     }
   ];
-    temp_listfilter = '';
+  temp_listfilter = "";
   get listFilter(): string {
     return this.temp_listfilter;
   }
   set listFilter(value: string) {
     this.temp_listfilter = value;
-    this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
+    this.filteredProducts = this.listFilter
+      ? this.performFilter(this.listFilter)
+      : this.products;
   }
-  constructor (){
+  constructor() {
     this.filteredProducts = this.products;
-    this.listFilter =''
+    this.listFilter = "";
   }
   toggleImage(): void {
     this.showImage = !this.showImage;
   }
-    performFilter(filterBy: string): IProduct[] {
+  onRatingClicked(message: string): void {
+    this.pageTitle = "Product List: " + message;
+  }
+  performFilter(filterBy: string): IProduct[] {
     filterBy = filterBy.toLocaleLowerCase();
-    return this.products.filter((product: IProduct) =>
-      product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+    return this.products.filter(
+      (product: IProduct) =>
+        product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1
+    );
   }
 }
