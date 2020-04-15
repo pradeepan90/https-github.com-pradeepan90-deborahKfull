@@ -14,6 +14,7 @@ export class ProductListComponent {
   filteredProducts: IProduct[] = [];
   products: IProduct[] ;
   temp_listfilter = "";
+    errorMessage = '';
   get listFilter(): string {
     return this.temp_listfilter;
   }
@@ -41,7 +42,14 @@ export class ProductListComponent {
     );
   }
   ngOnInit(): void {
-    this.products = this.productService.getProducts();
-    this.filteredProducts = this.products;
+   // this.products = this.productService.getProducts();
+   // this.filteredProducts = this.products;
+       this.productService.getProducts().subscribe({
+      next: products => {
+        this.products = products;
+        this.filteredProducts = this.products;
+      },
+      error: err => this.errorMessage = err
+    });
   }
 }
